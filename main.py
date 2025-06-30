@@ -1,4 +1,5 @@
 import math
+
 def is_prime(n):
     if n < 2:
         return False
@@ -6,6 +7,7 @@ def is_prime(n):
         if n % i == 0:
             return False
     return True
+
 
 def rsa():
     print("\n--- RSA ---")
@@ -35,13 +37,39 @@ def rsa():
 
     c = (m ** e) % n
     print(f"Зашифрованное сообщение: {c}")
-
     m2 = (c ** d) % n
     print(f"Расшифрованное сообщение: {m2}")
+
+def diffie():
+    print("\n--- Диффи-Хелман ---")
+    p = int(input("Введите простое число p: "))
+    if not is_prime(p):
+        print("Ошибка: p не простое число!")
+        return
+    g = int(input("Введите генератор g: "))
+    a = int(input("Сторона A: введите секретное число a: "))
+    b = int(input("Сторона B: введите секретное число b: "))
+
+    A = (g ** a) % p
+    B = (g ** b) % p
+    print(f"A отправляет B: {A}")
+    print(f"B отправляет A: {B}")
+
+    s1 = (B ** a) % p
+    s2 = (A ** b) % p
+    print(f"Секрет, вычисленный A: {s1}")
+    print(f"Секрет, вычисленный B: {s2}")
+
+    if s1 == s2:
+        print("Успех: секреты совпадают!")
+    else:
+        print("Ошибка: секреты не совпадают...")
+
 
 def main():
     print("Простая утилита: RSA и Diffie-Hellman")
     rsa()
+    diffie()
 
 if __name__ == '__main__':
     main()
