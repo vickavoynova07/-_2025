@@ -1,5 +1,7 @@
 import math
 
+# Проверка простоты числа
+
 def is_prime(n):
     if n < 2:
         return False
@@ -8,6 +10,7 @@ def is_prime(n):
             return False
     return True
 
+#  RSA
 
 def rsa():
     print("\n--- RSA ---")
@@ -19,10 +22,12 @@ def rsa():
     n = p * q
     phi = (p - 1) * (q - 1)
 
+    # Выбор открытой экспоненты e
     e = 2
     while math.gcd(e, phi) != 1:
         e += 1
 
+    # Поиск закрытой экспоненты d
     d = 1
     while (e * d) % phi != 1:
         d += 1
@@ -35,10 +40,15 @@ def rsa():
         print("Ошибка: m должно быть меньше n!")
         return
 
+    # Шифрование
     c = (m ** e) % n
     print(f"Зашифрованное сообщение: {c}")
+
+    # Дешифрование
     m2 = (c ** d) % n
     print(f"Расшифрованное сообщение: {m2}")
+
+# функция Диффи-Хеллмана
 
 def diffie():
     print("\n--- Диффи-Хелман ---")
@@ -65,6 +75,7 @@ def diffie():
     else:
         print("Ошибка: секреты не совпадают...")
 
+# Запуск
 
 def main():
     print("Простая утилита: RSA и Diffie-Hellman")
